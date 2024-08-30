@@ -6,12 +6,14 @@ screen.setup(width=500,height=400)
 user_cash = 500
 def game():
     global user_cash
+    colors = ["red","orange","yellow","green","blue","purple"]
     user_color = screen.textinput(title="Make your bet",prompt="Which colour turtle will win the race? Enter a colour:")
     user_bet = screen.numinput(title="Turtle Races",prompt="How much do you gamble?",default=0,minval=0,maxval=user_cash)
-
+    if user_color not in colors:
+        user_color = screen.textinput(title="Make your bet",prompt="That colour cannot be selected choose from either red,orange,yellow,green,blue,purple. Enter a colour:")
+    
     is_race_on = False
 
-    colors = ["red","orange","yellow","green","blue","purple"]
     all_turtles = []
     first_position = 75
     for racer in range(0,6):
@@ -22,9 +24,8 @@ def game():
         first_position -= 30
         all_turtles.append(new_turtle)
 
-        
-
-    if user_bet and user_color:
+    
+    if user_bet >= 0 and user_color:
         is_race_on =True
 
     while is_race_on:
